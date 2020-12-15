@@ -1,0 +1,42 @@
+Samples
+Start-Date: 2020-05-02  23:30:36
+Commandline: apt remove ruby
+Requested-By: lealac (1000)
+Remove: ri:amd64 (1:2.5.1), ruby2.5:amd64 (2.5.1-1ubuntu1.6), rake:amd64 (12.3.1-1ubuntu0.1), ruby-dev:amd64 (1:2.5.1), ruby2.5-dev:amd64 (2.5.1-1ubuntu1.6), ruby-full:amd64 (1:2.5.1), libruby2.5:amd64 (2.5.1-1ubuntu1.6), ruby:amd64 (1:2.5.1), ruby-test-unit:amd64 (3.2.5-1)
+End-Date: 2020-05-02  23:30:38
+
+Start-Date: 2020-05-02  23:31:24
+Commandline: apt-get install ruby-full
+Requested-By: lealac (1000)
+Install: ri:amd64 (1:2.5.1, automatic), ruby2.5:amd64 (2.5.1-1ubuntu1.6, automatic), rake:amd64 (12.3.1-1ubuntu0.1, automatic), ruby-dev:amd64 (1:2.5.1, automatic), ruby2.5-dev:amd64 (2.5.1-1ubuntu1.6, automatic), ruby-full:amd64 (1:2.5.1), libruby2.5:amd64 (2.5.1-1ubuntu1.6, automatic), ruby:amd64 (1:2.5.1, automatic), ruby-test-unit:amd64 (3.2.5-1, automatic)
+End-Date: 2020-05-02  23:31:29
+
+Start-Date: 2020-06-20  14:59:37
+Commandline: apt install traceroute
+Requested-By: lealac (1000)
+Install: traceroute:amd64 (1:2.1.0-2)
+End-Date: 2020-06-20  14:59:38
+
+Start-Date: 2020-06-20  15:00:38
+Commandline: apt remove traceroute
+Requested-By: lealac (1000)
+Remove: traceroute:amd64 (1:2.1.0-2)
+End-Date: 2020-06-20  15:00:39
+
+Start-Date: 2020-06-25  18:20:10
+Commandline: apt-get install python3-venv
+Requested-By: lealac (1000)
+Install: python3.6-venv:amd64 (3.6.9-1~18.04ubuntu1, automatic), python3-venv:amd64 (3.6.7-1~18.04)
+End-Date: 2020-06-25  18:20:12
+
+Start-Date: 2020-07-18  22:17:22
+Commandline: apt install httpie
+Requested-By: lealac (1000)
+Install: python3-pygments:amd64 (2.2.0+dfsg-1, automatic), httpie:amd64 (0.9.8-2)
+End-Date: 2020-07-18  22:17:24
+
+Start-Date: 2020-11-11  12:17:59
+Commandline: apt install nmap
+Requested-By: lealac (1000)
+Install: liblinear3:amd64 (2.1.0+dfsg-2, automatic), nmap:amd64 (7.60-1ubuntu5), liblua5.3-0:amd64 (5.3.3-1ubuntu0.18.04.1, automatic), libblas3:amd64 (3.7.1-4ubuntu1, automatic)
+End-Date: 2020-11-11  12:18:01
