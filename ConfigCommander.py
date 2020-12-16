@@ -6,14 +6,46 @@ osinfo = sys.platform
 from python_inquirer import *
 from inquirer import *
 #patch this up 
-
+PathsList = []
 
 def BackupApps(path='/var/log/apt/history.log'):
     """
     This backs up apps. 
     """
-    print("So just to be clear, this only backs up things that are installed via apt/yum/pkg. If you need stuff in other folders, try using rsync.")
-    input("Please type what folders you want to have ")
+    #print("So just to be clear, this only backs up things that are installed via apt/yum/pkg. If you need stuff in other folders, try using rsync.")
+    print("'Please select paths you want included. These should be paths like /usr/bin/ or /usr/bin/sbin'. Do not use arrow keys")
+
+    while True:
+        pathquestions = [Path('path_file',path_type=Path.DIRECTORY,exists=True)]
+        try:
+            PathsList.update(inquirer.prompt(pathquestions))
+        except TypeError as identifier:
+            print("You probably used arrow keys, don't do that.")
+            continue
+
+        correct = inquirer.confirm("Would you like to back up another folder?", default=False)
+        if correct:
+            continue
+        else:
+            break
+    
+    print("Okay so we've got the paths you want to backup.")
+    print("These paths are: " + str(PathsList))
+    print("Anyway, We're now backing up everything in these paths. Please hold. ")
+    def CreateSet(InputPath):
+        y = 0
+        i = {y+1: x for x in os.walk('.')}
+        return i
+    
+    resultslist = []
+
+    for i in PathsList:
+        resultslist.append(CreateSet(i))
+    
+    
+    
+    
+    #basically make it for file name in a folder
     # try:
     #     if os.path.exists(path):
     #         sucesslist = []
@@ -103,6 +135,17 @@ def main():
     if answers['Options'] in optionsdict.keys():
         optionsdict[choice]()
         print("yes")
+
+
+    #questions = [
+        #     inquirer.List('Options',
+        #                 message="Which do you wish to choose?",
+        #                 choices=['Backup Apps', 'Restore Apps', 'Backup Settings', 'Restore Settings']
+        #                 )
+        # ]
+        # answers = inquirer.prompt(questions)
+        
+        # choice = (answers['Options'])
 
 if __name__ == "__main__":
     main()
