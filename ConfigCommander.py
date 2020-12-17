@@ -1,46 +1,68 @@
 import os, sys, logging, inquirer
+from re import match
 from inquirer import questions
-
+#potentially use the pkg module
 import python_inquirer
 osinfo = sys.platform
 from python_inquirer import *
 from inquirer import *
 #patch this up 
 PathsList = []
+choices = []
+packagesfiltered = []
+
 
 def BackupApps(path='/var/log/apt/history.log'):
     """
     This backs up apps. 
     """
-    #print("So just to be clear, this only backs up things that are installed via apt/yum/pkg. If you need stuff in other folders, try using rsync.")
-    print("'Please select paths you want included. These should be paths like /usr/bin/ or /usr/bin/sbin'. Do not use arrow keys")
+    print("So just to be clear, this only backs up things that are installed via apt at the moment. It is designed to get stuff that was installed with sudo apt get or sudo apt install. It does not look for snaps and relies on apt list --installed | egrep -v automatic | egrep -v bionic-updates. So like, proceed with caution. If you need stuff in other folders, try using rsync.")
+    print("Please select what paths you want included ")
+    #apt list --installed | egrep -v automatic | egrep -v bionic-updates
+#Okay so we want to have it selected via the selection cli 
+#In the future we'll want to replace this with subprocess, however at the moment subprocess supports a single command so...
+stream = os.popen('apt list --installed | egrep -v automatic | egrep -v bionic-updates')
+packagesunfiltered = (stream.readlines())
+for i in packagesunfiltered:
+     packagesfiltered.append(i.partition('/')[0])
+     
+questions = [
+        inquirer.List('Options',
+                      message="Which apps do you wish to backup?",
+                      questionoptions=choices
+                      )
+    ]
+answers = inquirer.prompt(questions)
 
-    while True:
-        pathquestions = [Path('path_file',path_type=Path.DIRECTORY,exists=True)]
-        try:
-            PathsList.update(inquirer.prompt(pathquestions))
-        except TypeError as identifier:
-            print("You probably used arrow keys, don't do that.")
-            continue
+print(answers)    
+# filter(r.match, list)
 
-        correct = inquirer.confirm("Would you like to back up another folder?", default=False)
-        if correct:
-            continue
-        else:
-            break
+    # while True:
+    #     pathquestions = [Path('path_file',path_type=Path.DIRECTORY,exists=True)]
+    #     try:
+    #         PathsList.update(inquirer.prompt(pathquestions))
+    #     except TypeError as identifier:
+    #         print("You probably used arrow keys, don't do that.")
+    #         continue
+
+    #     correct = inquirer.confirm("Would you like to back up another folder?", default=False)
+    #     if correct:
+    #         continue
+    #     else:
+    #         break
     
-    print("Okay so we've got the paths you want to backup.")
-    print("These paths are: " + str(PathsList))
-    print("Anyway, We're now backing up everything in these paths. Please hold. ")
-    def CreateSet(InputPath):
-        y = 0
-        i = {y+1: x for x in os.walk('.')}
-        return i
+    # print("Okay so we've got the paths you want to backup.")
+    # print("These paths are: " + str(PathsList))
+    # print("Anyway, We're now backing up everything in these paths. Please hold. ")
+    # def CreateSet(InputPath):
+    #     y = 0
+    #     i = {y+1: x for x in os.walk('.')}
+    #     return i
     
-    resultslist = []
+    # resultslist = []
 
-    for i in PathsList:
-        resultslist.append(CreateSet(i))
+    # for i in PathsList:
+    #     resultslist.append(CreateSet(i))
     
     
     
